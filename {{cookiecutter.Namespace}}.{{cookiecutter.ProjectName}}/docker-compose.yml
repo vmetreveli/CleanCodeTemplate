@@ -1,0 +1,17 @@
+﻿services:
+  notification.db:
+    image: postgres
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+  
+  cai.send.api:
+    image: ${DOCKER_REGISTRY-}cai.notifications
+    build:
+      context: .
+      dockerfile: src/Cai.Send.Api/Dockerfile
+
+
+volumes:
+  postgres_data:
+ 

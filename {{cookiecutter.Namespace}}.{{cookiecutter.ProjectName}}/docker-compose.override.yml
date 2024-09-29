@@ -1,0 +1,36 @@
+services:
+  
+  notification.db:
+    container_name: notification.db
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=cai22
+      - POSTGRES_DB=NotificationDb
+    restart: always
+    ports:
+      - "5431:5431"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  
+  
+  cai.send.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=NotificationDb;Port=5431;Database=NotificationDb;User Id=app;Password=cai22;"
+      - "RabbitMQ:Host=rabbitmq"
+      - "RabbitMQ:VirtualHost=dev"
+      - "RabbitMQ:Username=guest"
+      - "RabbitMQ:Password=guest"
+    depends_on:
+      - notification.db
+      - rabbitmq
+    ports:
+      - "5129:8080"
+  
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  
