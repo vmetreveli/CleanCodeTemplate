@@ -19,4 +19,8 @@
     <ItemGroup>
         <Compile Remove="Contracts\Sms\SmsMessageResponse.cs"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Features\.DS_Store" />
+    </ItemGroup>
 </Project>
