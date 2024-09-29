@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cai.Send.Api", "src\Cai.Send.Api\Cai.Send.Api.csproj", "{C6B964C0-684E-4CF2-BA4E-8EC7FA7D5EA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api", "src\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.csproj", "{C6B964C0-684E-4CF2-BA4E-8EC7FA7D5EA6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cai.Send.Domain", "src\Cai.Send.Domain\Cai.Send.Domain.csproj", "{4BB34025-DF97-4A57-B542-F960E1478064}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain", "src\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain.csproj", "{4BB34025-DF97-4A57-B542-F960E1478064}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0DAA6B86-E733-43BE-A0A3-7E6D3824A944}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FF13C8DC-08EC-493B-B7A2-23E28D91563E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cai.Send.Infrastructure", "src\Infrastructure\Cai.Send.Infrastructure\Cai.Send.Infrastructure.csproj", "{A970B741-B8DD-47C7-AB60-4A516B26F37E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure", "src\Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.csproj", "{A970B741-B8DD-47C7-AB60-4A516B26F37E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cai.Send.Application", "src\Cai.Send.Application\Cai.Send.Application.csproj", "{EEF03970-3470-4454-BF09-A48D6428DAEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.ExternalServices", "src\Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.ExternalServices\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.ExternalServices.csproj", "{92BB0A36-4A52-4C12-AED1-F04255809922}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application", "src\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.csproj", "{EEF03970-3470-4454-BF09-A48D6428DAEE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{3D3205F5-0278-470E-BC29-C2C7615A24DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{59F7AED2-D59B-4194-B440-CC4BE5E55373}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsynchronousAdapter", "src\Integration\AsynchronousAdapter\AsynchronousAdapter.csproj", "{33F1963C-DD24-4322-918E-FECF698E4B05}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cai.Send.Infrastructure.ExternalServices", "src\Infrastructure\Cai.Send.Infrastructure.ExternalServices\Cai.Send.Infrastructure.ExternalServices.csproj", "{92BB0A36-4A52-4C12-AED1-F04255809922}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter", "src\Integration\AsynchronousAdapter\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter.csproj", "{33F1963C-DD24-4322-918E-FECF698E4B05}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{870594EE-CBD3-436A-9811-A261F76EF837}"
 EndProject
