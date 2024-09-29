@@ -1,6 +1,4 @@
-﻿using Cai.Send.Api.Routes;
-using Framework.Abstractions.Dispatchers;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Cai.Send.Api.Controllers;
 

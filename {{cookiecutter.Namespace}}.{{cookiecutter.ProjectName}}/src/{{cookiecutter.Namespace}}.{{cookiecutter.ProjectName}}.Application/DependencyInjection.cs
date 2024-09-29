@@ -1,8 +1,4 @@
-﻿using Cai.Send.Domain.Events;
-using Cai.Send.Infrastructure.Events.DealersPortalTempPasswordEvent;
-using Framework.Infrastructure;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Cai.Send.Application;
 

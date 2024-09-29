@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Cai.Send.Domain.Entities.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 

@@ -1,11 +1,7 @@
 using Asp.Versioning;
-using AsynchronousAdapter;
 using Cai.Send.Api;
 using Cai.Send.Api.Middleware;
 using Cai.Send.Api.Swagger;
-using Cai.Send.Application;
-using Cai.Send.Infrastructure;
-using Framework.Infrastructure;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;

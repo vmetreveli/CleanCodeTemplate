@@ -1,8 +1,4 @@
-﻿using Cai.Send.Domain.Repository;
-using Cai.Send.Infrastructure.Context;
-using Cai.Send.Infrastructure.ExternalServices;
-using Cai.Send.Infrastructure.Repositories;
-using Framework.Abstractions.Repository;
+﻿using Cai.Send.Infrastructure.Context;
 using Framework.Infrastructure.Interceptors;
 using Framework.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;

@@ -13,8 +13,8 @@
         <ProjectReference Include="..\..\Cai.Send.Application\Cai.Send.Application.csproj"/>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Common\" />
-      <Folder Include="Consumers\" />
+        <Folder Include="Common\"/>
+        <Folder Include="Consumers\"/>
     </ItemGroup>
 
 </Project>

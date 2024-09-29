@@ -1,6 +1,4 @@
-﻿using Cai.Send.Domain.Entities.Events;
-using Cai.Send.Domain.Entities.Events.DomainObjects;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cai.Send.Infrastructure.Context.Configurations;

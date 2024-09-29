@@ -1,8 +1,5 @@
-﻿using Cai.Send.Infrastructure.ExternalServices.Services.CaiprogAdapter;
-using Cai.Send.Infrastructure.ExternalServices.Services.Catalog;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Refit;
 
 namespace Cai.Send.Infrastructure.ExternalServices;
 
@@ -21,8 +18,8 @@ public static class DependencyInjection
         var baseAddress = configuration["AppConfiguration:ExternalServices:CatalogApi:BaseAddress"];
         baseAddress.ThrowIfNullOrEmpty();
 
-        services.AddRefitClient<IGlobalDictionaryService>()
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
+        HttpClientBuilderExtensions.ConfigureHttpClient(services.AddRefitClient<IGlobalDictionaryService>(),
+            c => c.BaseAddress = new Uri(baseAddress));
     }
 
     private static void AddAdapterApiClient(IServiceCollection services, IConfiguration configuration)
@@ -30,7 +27,7 @@ public static class DependencyInjection
         var baseAddress = configuration["AppConfiguration:ExternalServices:CaiprogAdapter:BaseAddress"];
         baseAddress.ThrowIfNullOrEmpty();
 
-        services.AddRefitClient<ICaiprogAdapterService>()
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
+        HttpClientBuilderExtensions.ConfigureHttpClient(services.AddRefitClient<ICaiprogAdapterService>(),
+            c => c.BaseAddress = new Uri(baseAddress));
     }
 }

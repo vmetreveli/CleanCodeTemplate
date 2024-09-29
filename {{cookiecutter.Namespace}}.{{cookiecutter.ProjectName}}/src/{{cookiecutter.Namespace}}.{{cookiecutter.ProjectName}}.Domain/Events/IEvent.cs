@@ -1,6 +1,4 @@
-﻿using Cai.Send.Domain.Entities.Events;
-
-namespace Cai.Send.Domain.Events;
+﻿namespace Cai.Send.Domain.Events;
 
 public interface IEvent
 {

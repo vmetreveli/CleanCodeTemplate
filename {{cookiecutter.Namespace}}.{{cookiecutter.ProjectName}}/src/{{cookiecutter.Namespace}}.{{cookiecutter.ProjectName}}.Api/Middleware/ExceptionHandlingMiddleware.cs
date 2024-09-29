@@ -1,5 +1,4 @@
-﻿using Cai.Send.Application.Exceptions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Cai.Send.Api.Middleware;
 
