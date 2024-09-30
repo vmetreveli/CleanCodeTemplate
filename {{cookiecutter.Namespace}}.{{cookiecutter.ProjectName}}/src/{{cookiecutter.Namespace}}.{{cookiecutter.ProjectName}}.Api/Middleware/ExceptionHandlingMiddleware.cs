@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Cai.Send.Api.Middleware;
+namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Middleware;
 
 public sealed class ExceptionHandlingMiddleware : IMiddleware
 {

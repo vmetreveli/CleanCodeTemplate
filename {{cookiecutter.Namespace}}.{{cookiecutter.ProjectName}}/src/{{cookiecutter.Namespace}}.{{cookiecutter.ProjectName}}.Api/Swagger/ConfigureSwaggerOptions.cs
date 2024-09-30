@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Cai.Send.Api.Swagger;
+namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Swagger;
 
 public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
 {

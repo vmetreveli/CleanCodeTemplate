@@ -1,7 +1,6 @@
 using Asp.Versioning;
-using Cai.Send.Api;
-using Cai.Send.Api.Middleware;
-using Cai.Send.Api.Swagger;
+using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Middleware;
+using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Swagger;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;

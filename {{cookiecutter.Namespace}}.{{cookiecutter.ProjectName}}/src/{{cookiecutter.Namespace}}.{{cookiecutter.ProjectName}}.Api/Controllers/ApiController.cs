@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Cai.Send.Api.Controllers;
+namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Controllers;
 
 [ApiController]
 [Route(ApiRoutes.BaseRoute)]

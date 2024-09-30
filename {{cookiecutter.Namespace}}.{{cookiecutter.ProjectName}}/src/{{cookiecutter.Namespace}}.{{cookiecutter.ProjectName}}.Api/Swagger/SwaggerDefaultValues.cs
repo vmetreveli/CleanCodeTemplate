@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Cai.Send.Api.Swagger;
+namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Swagger;
 
 public class SwaggerDefaultValues : IOperationFilter
 {

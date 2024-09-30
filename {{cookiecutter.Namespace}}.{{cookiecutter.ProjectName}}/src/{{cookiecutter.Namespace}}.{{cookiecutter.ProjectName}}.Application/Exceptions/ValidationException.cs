@@ -1,4 +1,4 @@
-namespace Cai.Send.Application.Exceptions;
+namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.Exceptions;
 
 public sealed class ValidationException : Exception
 {

@@ -54,4 +54,8 @@
         <ProjectReference Include="..\Integration\AsynchronousAdapter\AsynchronousAdapter.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="HealthChecks\" />
+    </ItemGroup>
+
 </Project>

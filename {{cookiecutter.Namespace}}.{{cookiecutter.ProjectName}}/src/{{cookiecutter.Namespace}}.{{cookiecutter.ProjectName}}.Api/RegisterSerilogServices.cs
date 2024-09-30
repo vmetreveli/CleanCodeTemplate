@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace Cai.Send.Api;
+namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api;
 
 public static class RegisterSerilogServices
 {
