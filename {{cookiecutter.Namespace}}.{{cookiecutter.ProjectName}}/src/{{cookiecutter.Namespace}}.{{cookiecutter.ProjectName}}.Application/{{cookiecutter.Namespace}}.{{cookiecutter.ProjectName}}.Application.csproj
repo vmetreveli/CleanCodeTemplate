@@ -12,8 +12,8 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
-        <ProjectReference Include="..\Cai.Send.Domain\Cai.Send.Domain.csproj"/>
-        <ProjectReference Include="..\Infrastructure\Cai.Send.Infrastructure\Cai.Send.Infrastructure.csproj"/>
+        <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain.csproj"/>
+        <ProjectReference Include="..\Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

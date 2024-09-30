@@ -10,7 +10,7 @@
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\Cai.Send.Application\Cai.Send.Application.csproj"/>
+        <ProjectReference Include="..\..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Common\"/>

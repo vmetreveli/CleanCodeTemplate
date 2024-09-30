@@ -50,8 +50,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Cai.Send.Application\Cai.Send.Application.csproj"/>
-        <ProjectReference Include="..\Integration\AsynchronousAdapter\AsynchronousAdapter.csproj"/>
+        <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.csproj"/>
+        <ProjectReference Include="..\Integration\AsynchronousAdapter\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

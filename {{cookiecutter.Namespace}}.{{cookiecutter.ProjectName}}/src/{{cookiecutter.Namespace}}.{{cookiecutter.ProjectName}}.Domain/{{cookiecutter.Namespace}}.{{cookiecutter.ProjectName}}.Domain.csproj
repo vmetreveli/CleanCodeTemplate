@@ -17,25 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Entities\Dealer.cs"/>
-        <Compile Remove="Entities\EmailMessage.cs"/>
-        <Compile Remove="Entities\EmailTemplate.cs"/>
-        <Compile Remove="Entities\EmailTemplatesArchive.cs"/>
-        <Compile Remove="Entities\EventsDictionary.cs"/>
-        <Compile Remove="Entities\ExternalDeclinedEmail.cs"/>
-        <Compile Remove="Entities\ExternalDeclinedMobile.cs"/>
-        <Compile Remove="Entities\ExternalDeclinedSocialAccount.cs"/>
-        <Compile Remove="Entities\MessageCategory.cs"/>
-        <Compile Remove="Entities\MessagePriority.cs"/>
-        <Compile Remove="Entities\Promotion.cs"/>
-        <Compile Remove="Entities\Provider.cs"/>
-        <Compile Remove="Entities\Region.cs"/>
-        <Compile Remove="Entities\RegionLanguage.cs"/>
-        <Compile Remove="Entities\SmsMessage.cs"/>
-        <Compile Remove="Entities\SmsTemplate.cs"/>
-        <Compile Remove="Entities\SmsTemplatesArchive.cs"/>
-        <Compile Remove="Entities\SocialMessage.cs"/>
-        <Compile Remove="Entities\SocialTemplatesArchive.cs"/>
+      
     </ItemGroup>
 
     <ItemGroup>

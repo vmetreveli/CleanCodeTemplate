@@ -8,9 +8,10 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
-        <ProjectReference Include="..\..\Cai.Send.Domain\Cai.Send.Domain.csproj"/>
-        <ProjectReference Include="..\Cai.Send.Infrastructure.ExternalServices\Cai.Send.Infrastructure.ExternalServices.csproj"/>
+        <ProjectReference Include="..\..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain.csproj"/>
+        <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.ExternalServices.csproj"/>
     </ItemGroup>
+   
 
     <ItemGroup>
         <PackageReference Include="EFCore.NamingConventions" Version="8.0.3"/>
