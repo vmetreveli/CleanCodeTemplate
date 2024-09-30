@@ -1,4 +1,4 @@
-# Cookiecutter for Dotnet Console Applications
+# Cookiecutter for Dotnet CleanCodeTemplate DDD
 
 A Cookiecutter template to create Dotnet CleanCodeTemplate DDD
 
