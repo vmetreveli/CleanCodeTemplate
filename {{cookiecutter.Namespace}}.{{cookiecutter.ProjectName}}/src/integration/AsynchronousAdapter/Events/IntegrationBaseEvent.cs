@@ -1,4 +1,4 @@
-﻿namespace AsynchronousAdapter.Events;
+﻿namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter.Events;
 
 // public abstract class IntegrationBaseEvent
 // {

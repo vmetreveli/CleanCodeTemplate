@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace AsynchronousAdapter;
+namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter;
 
 public static class DependencyInjection
 {

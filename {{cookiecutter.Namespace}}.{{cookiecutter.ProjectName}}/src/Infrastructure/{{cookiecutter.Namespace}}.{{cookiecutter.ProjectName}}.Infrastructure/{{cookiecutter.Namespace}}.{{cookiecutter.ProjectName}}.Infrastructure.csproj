@@ -31,4 +31,8 @@
       <Content Include="Repositories\.DS_Store" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Context\Configurations\" />
+    </ItemGroup>
+
 </Project>

@@ -1,11 +1,10 @@
-﻿using Cai.Send.Infrastructure.Context;
-using Framework.Infrastructure.Interceptors;
+﻿using Framework.Infrastructure.Interceptors;
 using Framework.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Cai.Send.Infrastructure;
+namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure;
 
 public static class DependencyInjection
 {
@@ -16,7 +15,7 @@ public static class DependencyInjection
         services.AddScoped<UpdateDeletableEntitiesInterceptor>();
 
         services
-            .AddDbContext<DbContext, NotificationDbContext>((sp, options) =>
+            .AddDbContext<DbContext, {{cookiecutter.ProjectName}}DbContext>((sp, options) =>
             {
                 var outboxMessagesInterceptor = sp.GetService<InsertOutboxMessagesInterceptor>();
                 var auditableInterceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
@@ -40,9 +39,9 @@ public static class DependencyInjection
                     .EnableDetailedErrors();
             });
 
-        services.AddScoped<IEventRepository, EventRepository>();
+        //services.AddScoped<IEventRepository, EventRepository>();
         //  services.AddScoped<IEventDictionaryRepository, EventDictionaryRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork<NotificationDbContext>>();
+        services.AddScoped<IUnitOfWork, UnitOfWork<{{cookiecutter.ProjectName}}DbContext>>();
 
 
         services.AddExternalServices(configuration);

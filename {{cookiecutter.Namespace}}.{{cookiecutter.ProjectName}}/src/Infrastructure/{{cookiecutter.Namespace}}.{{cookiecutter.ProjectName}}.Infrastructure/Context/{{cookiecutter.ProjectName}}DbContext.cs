@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Cai.Send.Infrastructure.Context;
 
-public class NotificationDbContext(DbContextOptions<NotificationDbContext> options)
+public class {{cookiecutter.ProjectName}}DbContext(DbContextOptions<{{cookiecutter.ProjectName}}DbContext> options)
     : DbContext(options)
 {
     #region Entities
 
     // public DbSet<EventsDictionary> EventsDictionary { get; set; }
-    public DbSet<Event> Events { get; set; }
+    // public DbSet<Event> Events { get; set; }
     //public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
     #endregion
@@ -22,15 +22,15 @@ public class NotificationDbContext(DbContextOptions<NotificationDbContext> optio
     }
 }
 
-public class NotificationDbContextFactory : IDesignTimeDbContextFactory<NotificationDbContext>
+public class {{cookiecutter.ProjectName}}DbContextFactory : IDesignTimeDbContextFactory<{{cookiecutter.ProjectName}}DbContext>
 {
-    public NotificationDbContext CreateDbContext(string[] args)
+    public {{cookiecutter.ProjectName}}DbContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<NotificationDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<{{cookiecutter.ProjectName}}DbContext>();
         optionsBuilder
             .UseNpgsql("DefaultConnection")
             .UseSnakeCaseNamingConvention();
 
-        return new NotificationDbContext(optionsBuilder.Options);
+        return new {{cookiecutter.ProjectName}}DbContext(optionsBuilder.Options);
     }
 }

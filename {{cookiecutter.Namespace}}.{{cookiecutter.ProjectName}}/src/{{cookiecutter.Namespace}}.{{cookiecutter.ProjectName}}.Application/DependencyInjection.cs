@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Cai.Send.Application;
+namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application;
 
 public static class DependencyInjection
 {
@@ -10,7 +10,7 @@ public static class DependencyInjection
     {
         services.AddAutoMapper(typeof(DependencyInjection).Assembly);
         services.AddFramework(configuration, typeof(DependencyInjection).Assembly);
-        services.AddKeyedScoped<IEvent, DealersPortalTempPasswordEvent>(nameof(DealersPortalTempPasswordEvent));
+        // services.AddKeyedScoped<IEvent, DealersPortalTempPasswordEvent>(nameof(DealersPortalTempPasswordEvent));
 
         return services;
     }

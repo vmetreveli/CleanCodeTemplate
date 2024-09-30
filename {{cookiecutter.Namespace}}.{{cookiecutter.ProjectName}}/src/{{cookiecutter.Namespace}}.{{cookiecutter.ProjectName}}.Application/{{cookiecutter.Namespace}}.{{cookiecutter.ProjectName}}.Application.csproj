@@ -21,6 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Features\.DS_Store" />
+        <Content Include="Features\.DS_Store"/>
     </ItemGroup>
 </Project>

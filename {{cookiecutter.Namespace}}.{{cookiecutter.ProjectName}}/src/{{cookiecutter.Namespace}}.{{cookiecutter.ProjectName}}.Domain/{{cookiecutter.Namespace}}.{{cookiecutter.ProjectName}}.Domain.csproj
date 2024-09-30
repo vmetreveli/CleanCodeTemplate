@@ -39,9 +39,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Entities\.DS_Store" />
-      <Content Include="Exception\.DS_Store" />
-      <Content Include="Repository\.DS_Store" />
+      <Folder Include="Entities\" />
+      <Folder Include="Events\" />
+      <Folder Include="Exception\" />
+      <Folder Include="Repository\" />
     </ItemGroup>
 
 </Project>
