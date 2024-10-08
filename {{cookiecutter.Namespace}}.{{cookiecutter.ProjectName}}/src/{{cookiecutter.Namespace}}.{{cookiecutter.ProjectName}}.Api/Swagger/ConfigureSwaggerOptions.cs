@@ -24,10 +24,10 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         var info = new OpenApiInfo
         {
-            Title = "Notifications API",
+            Title = "{{cookiecutter.ProjectName}} API",
             Version = description.ApiVersion.ToString(),
-            Description = "Description for the Notifications API",
-            Contact = new OpenApiContact { Name = "CAI" }
+            Description = "Description for the {{cookiecutter.ProjectName}}",
+            Contact = new OpenApiContact { Name = "{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}" }
         };
 
         if (description.IsDeprecated) info.Description += " This API version has been deprecated.";
