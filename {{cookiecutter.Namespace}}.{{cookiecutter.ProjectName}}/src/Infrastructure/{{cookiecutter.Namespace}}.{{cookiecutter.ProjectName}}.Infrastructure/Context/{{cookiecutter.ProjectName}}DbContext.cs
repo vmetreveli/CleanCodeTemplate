@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Cai.Send.Infrastructure.Context;
+namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.Context;
 
 public class {{cookiecutter.ProjectName}}DbContext(DbContextOptions<{{cookiecutter.ProjectName}}DbContext> options)
     : DbContext(options)
