@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Framework.Abstractions.Dispatchers;
+using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Routes;
 
 namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Controllers;
 
