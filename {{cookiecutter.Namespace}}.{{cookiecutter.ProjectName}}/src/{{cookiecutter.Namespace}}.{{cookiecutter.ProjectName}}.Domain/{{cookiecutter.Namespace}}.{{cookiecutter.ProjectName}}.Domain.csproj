@@ -13,11 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      
+        <ProjectReference Include="..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

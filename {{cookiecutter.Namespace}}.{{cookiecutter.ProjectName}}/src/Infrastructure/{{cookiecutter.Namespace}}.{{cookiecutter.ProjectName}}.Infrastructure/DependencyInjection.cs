@@ -1,10 +1,13 @@
-﻿using Framework.Infrastructure.Interceptors;
+﻿using Framework.Abstractions.Repository;
+using Framework.Infrastructure.Interceptors;
 using Framework.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.Context;
 
-namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure;
+
+namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.DbLoggerCategory.Infrastructure;
 
 public static class DependencyInjection
 {
