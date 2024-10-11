@@ -50,7 +50,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.\{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.csproj"/>
+        <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.csproj"/>
         <ProjectReference Include="..\Integration\AsynchronousAdapter\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter.csproj"/>
     </ItemGroup>
 
