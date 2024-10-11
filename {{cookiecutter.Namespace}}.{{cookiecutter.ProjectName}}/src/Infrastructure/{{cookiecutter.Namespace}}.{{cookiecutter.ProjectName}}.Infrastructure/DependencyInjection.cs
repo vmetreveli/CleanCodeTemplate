@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.Context;
 
 
-namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.DbLoggerCategory.Infrastructure;
+namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure;
 
 public static class DependencyInjection
 {

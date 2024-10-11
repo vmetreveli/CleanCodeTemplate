@@ -1,11 +1,13 @@
 using Asp.Versioning;
-using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Middleware;
-using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Swagger;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Middleware;
+using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Swagger;
 using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api;
 using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter;
+using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application;
+using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
