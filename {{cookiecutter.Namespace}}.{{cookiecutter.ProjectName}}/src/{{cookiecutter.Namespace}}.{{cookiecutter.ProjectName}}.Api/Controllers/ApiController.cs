@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Framework.Abstractions.Dispatchers;
 
 namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Controllers;
 
