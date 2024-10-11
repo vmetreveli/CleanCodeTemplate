@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter;
 

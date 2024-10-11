@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
         <ProjectReference Include="..\..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain.csproj"/>
         <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.ExternalServices.csproj"/>
     </ItemGroup>
