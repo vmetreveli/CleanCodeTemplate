@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.Exceptions;
 
 namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Middleware;
 
