@@ -11,16 +11,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
         <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain.csproj"/>
         <ProjectReference Include="..\Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Compile Remove="Contracts\Sms\SmsMessageResponse.cs"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="Features\.DS_Store"/>
-    </ItemGroup>
 </Project>
