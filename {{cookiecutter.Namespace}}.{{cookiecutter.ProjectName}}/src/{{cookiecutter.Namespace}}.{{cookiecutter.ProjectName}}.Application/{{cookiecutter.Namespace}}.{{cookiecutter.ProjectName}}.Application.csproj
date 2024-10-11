@@ -13,7 +13,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\Framework\Framework.Infrastructure\Framework.Infrastructure.csproj"/>
         <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain.csproj"/>
-        <ProjectReference Include="..\Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

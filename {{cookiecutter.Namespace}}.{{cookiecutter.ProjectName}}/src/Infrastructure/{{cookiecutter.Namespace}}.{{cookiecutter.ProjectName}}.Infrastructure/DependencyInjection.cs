@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.Context;
+using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.ExternalServices;
 
 
 namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure;
