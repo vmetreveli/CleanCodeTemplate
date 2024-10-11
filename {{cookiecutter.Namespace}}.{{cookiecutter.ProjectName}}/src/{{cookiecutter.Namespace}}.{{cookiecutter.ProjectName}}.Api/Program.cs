@@ -4,6 +4,8 @@ using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Swagger;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api;
+using  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.AsynchronousAdapter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,26 +15,6 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddSerilogServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
-
-// builder.Services
-//     .AddHealthChecks()
-//     .AddCheck<DbConnectionHealthCheck>("DbConnectionHealthCheck", HealthStatus.Unhealthy, new[] { "db" })
-//     .AddRabbitMQ(
-//         $"amqp://{builder.Configuration["AppConfiguration:RabbitMQ:Username"]}:{builder.Configuration["AppConfiguration:RabbitMQ:Password"]}@{builder.Configuration["AppConfiguration:RabbitMQ:Host"]}/{builder.Configuration["AppConfiguration:RabbitMQ:VirtualHost"]}",
-//         name: "RabbitMQ",
-//         failureStatus: HealthStatus.Unhealthy,
-//         tags: new[] { "rabbitmq" });
-
-
-// builder.Services
-//     .AddHealthChecksUI(opts =>
-//     {
-//         opts.AddHealthCheckEndpoint(ApiRoutes.RoutForHealth, "/health");
-//         opts.SetEvaluationTimeInSeconds(5);
-//         opts.SetMinimumSecondsBetweenFailureNotifications(10);
-//     })
-//     .AddInMemoryStorage();
-
 
 builder.Services.AddApiVersioning(options =>
     {
@@ -103,37 +85,6 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 
-    // endpoints.MapHealthChecks("/health", new HealthCheckOptions
-    // {
-    //     Predicate = _ => true,
-    //     ResponseWriter = async (context, report) =>
-    //     {
-    //         context.Response.ContentType = "application/json";
-    //         var json = JsonSerializer.Serialize(new
-    //         {
-    //             status = report.Status.ToString(),
-    //             results = report.Entries.Select(e => new
-    //             {
-    //                 key = e.Key,
-    //                 status = e.Value.Status.ToString(),
-    //                 description = e.Value.Description,
-    //                 error = e.Value.Exception?.Message,
-    //                 data = e.Value.Data
-    //             })
-    //         });
-    //         await context.Response.WriteAsync(json);
-    //     }
-    // });
-    //
-    // endpoints.MapHealthChecksUI(opt =>
-    // {
-    //     // opt.UseRelativeApiPath = false;
-    //     // opt.UseRelativeResourcesPath = false;
-    //     // opt.AsideMenuOpened = false;
-    //
-    //     opt.UIPath = "/health-ui";
-    //     //  opt.ApiPath = "/healthAPI";
-    // });
 });
 
 
