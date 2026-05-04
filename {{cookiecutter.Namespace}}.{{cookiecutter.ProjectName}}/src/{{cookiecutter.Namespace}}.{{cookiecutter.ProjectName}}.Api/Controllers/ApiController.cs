@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Framework.Abstractions.Dispatchers;
+using Meadow_Framework.Core.Abstractions.Dispatchers;
 using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Routes;
 
-namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Controllers;
+namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Controllers;
 
 [ApiController]
 [Route(ApiRoutes.BaseRoute)]

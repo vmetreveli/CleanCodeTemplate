@@ -2,7 +2,7 @@ using Asp.Versioning;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Framework.Infrastructure;
+using Meadow_Framework.Core.Infrastructure;
 using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Middleware;
 using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Swagger;
 using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api;
