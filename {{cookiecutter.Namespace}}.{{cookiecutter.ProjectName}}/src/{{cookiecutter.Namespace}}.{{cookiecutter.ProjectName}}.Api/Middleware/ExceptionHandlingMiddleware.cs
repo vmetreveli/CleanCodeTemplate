@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Application.Exceptions;
 
-namespace  {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Middleware;
+namespace {{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Api.Middleware;
 
 public sealed class ExceptionHandlingMiddleware : IMiddleware
 {
