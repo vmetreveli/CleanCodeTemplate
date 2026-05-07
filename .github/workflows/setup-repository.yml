@@ -1,0 +1,229 @@
+name: Setup Repository
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - cookiecutter.json
+
+permissions:
+  contents: write
+
+jobs:
+  setup:
+    name: Generate Project From Template
+
+    # Prevent infinite loop after generated commit
+    if: github.event.head_commit.message != 'Initial generated project'
+
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      # ----------------------------------------------------------------------
+      # Prevent execution on template repository itself
+      # ----------------------------------------------------------------------
+      - name: Check repository is not template source
+        shell: bash
+        run: |
+          TEMPLATE=$(curl --silent \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }} \
+            | jq -r '.is_template')
+
+          echo "Repository template flag: $TEMPLATE"
+
+          if [[ "$TEMPLATE" == "true" ]]; then
+            echo "This is the template repository itself. Skipping."
+            exit 1
+          fi
+
+      # ----------------------------------------------------------------------
+      # Checkout repository
+      # ----------------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ----------------------------------------------------------------------
+      # Setup Python
+      # ----------------------------------------------------------------------
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      # ----------------------------------------------------------------------
+      # Install Cookiecutter
+      # ----------------------------------------------------------------------
+      - name: Install Cookiecutter
+        run: |
+          python -m pip install --upgrade pip
+          pip install cookiecutter
+
+      # ----------------------------------------------------------------------
+      # Validate repository name
+      # Example:
+      #   CleanCode.Service.Users
+      #   CleanCode.Api.Payments
+      # ----------------------------------------------------------------------
+      - name: Validate repository naming convention
+        id: validate_repo
+        shell: bash
+        run: |
+          REPO_NAME="${{ github.event.repository.name }}"
+
+          shopt -s nocasematch
+
+          if [[ "$REPO_NAME" =~ ^(CleanCode|Framework)\.(Service|Api|Library|Worker)\.[A-Za-z]+([A-Za-z0-9\-]*)$ ]]; then
+            echo "valid=true" >> $GITHUB_OUTPUT
+            echo "Repository name valid"
+          else
+            echo "valid=false" >> $GITHUB_OUTPUT
+            echo "Invalid repository name"
+            echo ""
+            echo "Examples:"
+            echo "  CleanCode.Service.Users"
+            echo "  CleanCode.Api.Payments"
+            echo "  Framework.Library.Core"
+            exit 1
+          fi
+
+          shopt -u nocasematch
+
+      # ----------------------------------------------------------------------
+      # Generate project from Cookiecutter
+      # ----------------------------------------------------------------------
+      - name: Generate project
+        run: |
+          cookiecutter . \
+            --no-input \
+            --output-dir ./generated
+
+      # ----------------------------------------------------------------------
+      # Remove template files
+      # ----------------------------------------------------------------------
+      - name: Clean template repository
+        shell: bash
+        run: |
+          find . -maxdepth 1 \
+            ! -name '.git' \
+            ! -name 'generated' \
+            ! -name '.' \
+            -exec rm -rf {} +
+
+      # ----------------------------------------------------------------------
+      # Move generated files to repository root
+      # ----------------------------------------------------------------------
+      - name: Move generated project files
+        shell: bash
+        run: |
+          rsync -a ./generated/*/ ./
+          rm -rf ./generated
+
+      # ----------------------------------------------------------------------
+      # Setup .NET
+      # ----------------------------------------------------------------------
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      # ----------------------------------------------------------------------
+      # Restore solution
+      # ----------------------------------------------------------------------
+      - name: Restore dependencies
+        run: |
+          dotnet restore
+
+      # ----------------------------------------------------------------------
+      # Build solution
+      # ----------------------------------------------------------------------
+      - name: Build solution
+        run: |
+          dotnet build \
+            --configuration Release \
+            --no-restore
+
+      # ----------------------------------------------------------------------
+      # Run tests
+      # ----------------------------------------------------------------------
+      - name: Run tests
+        run: |
+          dotnet test \
+            --configuration Release \
+            --no-build \
+            --verbosity normal
+
+      # ----------------------------------------------------------------------
+      # Create common GitHub labels
+      # ----------------------------------------------------------------------
+      - name: Create repository labels
+        shell: bash
+        run: |
+          gh label create "bug" \
+            --color "d73a4a" \
+            --description "Something isn't working" || true
+
+          gh label create "enhancement" \
+            --color "a2eeef" \
+            --description "New feature or request" || true
+
+          gh label create "documentation" \
+            --color "0075ca" \
+            --description "Documentation improvements" || true
+
+          gh label create "technical-debt" \
+            --color "5319e7" \
+            --description "Refactoring or cleanup work" || true
+
+      # ----------------------------------------------------------------------
+      # Reinitialize repository history
+      # ----------------------------------------------------------------------
+      - name: Reinitialize git history
+        shell: bash
+        run: |
+          CURRENT_USER_NAME=$(git log -1 --pretty=format:'%an')
+          CURRENT_USER_EMAIL=$(git log -1 --pretty=format:'%ae')
+
+          git config user.name "$CURRENT_USER_NAME"
+          git config user.email "$CURRENT_USER_EMAIL"
+
+          git checkout --orphan generated-main
+
+          git add .
+
+          git commit -m "Initial generated project"
+
+          git branch -D main || true
+          git branch -m main
+
+          git push --force origin main
+
+      # ----------------------------------------------------------------------
+      # Remove setup workflow after generation
+      # ----------------------------------------------------------------------
+      - name: Remove bootstrap workflow
+        shell: bash
+        run: |
+          rm -f .github/workflows/setup-repository.yml
+
+          git add .
+
+          git commit --amend \
+            -m "Initial generated project"
+
+          git push --force origin main
+
+      # ----------------------------------------------------------------------
+      # Final output
+      # ----------------------------------------------------------------------
+      - name: Summary
+        run: |
+          echo "Repository successfully generated from template."
+          echo "Template bootstrap workflow removed."
+          echo "Project is ready."
