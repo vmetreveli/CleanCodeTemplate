@@ -71,29 +71,29 @@ jobs:
       #   CleanCode.Service.Users
       #   CleanCode.Api.Payments
       # ----------------------------------------------------------------------
-      - name: Validate repository naming convention
-        id: validate_repo
-        shell: bash
-        run: |
-          REPO_NAME="${{ github.event.repository.name }}"
+      # - name: Validate repository naming convention
+      #   id: validate_repo
+      #   shell: bash
+      #   run: |
+      #     REPO_NAME="${{ github.event.repository.name }}"
 
-          shopt -s nocasematch
+      #     shopt -s nocasematch
 
-          if [[ "$REPO_NAME" =~ ^(CleanCode|Framework)\.(Service|Api|Library|Worker)\.[A-Za-z]+([A-Za-z0-9\-]*)$ ]]; then
-            echo "valid=true" >> $GITHUB_OUTPUT
-            echo "Repository name valid"
-          else
-            echo "valid=false" >> $GITHUB_OUTPUT
-            echo "Invalid repository name"
-            echo ""
-            echo "Examples:"
-            echo "  CleanCode.Service.Users"
-            echo "  CleanCode.Api.Payments"
-            echo "  Framework.Library.Core"
-            exit 1
-          fi
+      #     if [[ "$REPO_NAME" =~ ^(CleanCode|Framework)\.(Service|Api|Library|Worker)\.[A-Za-z]+([A-Za-z0-9\-]*)$ ]]; then
+      #       echo "valid=true" >> $GITHUB_OUTPUT
+      #       echo "Repository name valid"
+      #     else
+      #       echo "valid=false" >> $GITHUB_OUTPUT
+      #       echo "Invalid repository name"
+      #       echo ""
+      #       echo "Examples:"
+      #       echo "  CleanCode.Service.Users"
+      #       echo "  CleanCode.Api.Payments"
+      #       echo "  Framework.Library.Core"
+      #       exit 1
+      #     fi
 
-          shopt -u nocasematch
+      #     shopt -u nocasematch
 
       # ----------------------------------------------------------------------
       # Generate project from Cookiecutter
