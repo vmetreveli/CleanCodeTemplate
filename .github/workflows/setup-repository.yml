@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  packages: read
 
 jobs:
   setup:
@@ -66,10 +67,7 @@ jobs:
           pip install cookiecutter
 
       # ----------------------------------------------------------------------
-      # Validate repository name
-      # Example:
-      #   CleanCode.Service.Users
-      #   CleanCode.Api.Payments
+      # Validate repository naming convention
       # ----------------------------------------------------------------------
       # - name: Validate repository naming convention
       #   id: validate_repo
@@ -134,22 +132,34 @@ jobs:
           dotnet-version: 8.0.x
 
       # ----------------------------------------------------------------------
-      # Setup GitHub Packages authentication
+      # Create NuGet.Config for GitHub Packages
       # ----------------------------------------------------------------------
-      - name: Setup GitHub Packages
+      - name: Configure NuGet
+        shell: bash
         run: |
-          dotnet nuget add source https://nuget.pkg.github.com/vmetreveli/index.json \
-            -n github \
-            -u vmetreveli \
-            -p ${{ secrets.PAT }} \
-            --store-password-in-clear-text
+          cat > NuGet.Config <<EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <packageSources>
+              <add key="github" value="https://nuget.pkg.github.com/vmetreveli/index.json" />
+              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+            </packageSources>
+
+            <packageSourceCredentials>
+              <github>
+                <add key="Username" value="vmetreveli" />
+                <add key="ClearTextPassword" value="${{ secrets.PAT }}" />
+              </github>
+            </packageSourceCredentials>
+          </configuration>
+          EOF
 
       # ----------------------------------------------------------------------
       # Restore solution
       # ----------------------------------------------------------------------
       - name: Restore dependencies
         run: |
-          dotnet restore
+          dotnet restore --configfile NuGet.Config
 
       # ----------------------------------------------------------------------
       # Build solution
