@@ -11,23 +11,6 @@
         <ProjectReference Include="..\..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Domain.csproj"/>
         <ProjectReference Include="..\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.ExternalServices\{{cookiecutter.Namespace}}.{{cookiecutter.ProjectName}}.Infrastructure.ExternalServices.csproj"/>
     </ItemGroup>
-   
-
-    <ItemGroup>
-        <PackageReference Include="EFCore.NamingConventions" Version="10.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.7">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.7" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.7" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.7" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
-
-    </ItemGroup>
-
 
     <ItemGroup>
       <Folder Include="Context\Configurations\" />
