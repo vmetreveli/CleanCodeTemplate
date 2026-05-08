@@ -141,7 +141,7 @@ jobs:
           dotnet nuget add source https://nuget.pkg.github.com/vmetreveli/index.json \
             -n github \
             -u vmetreveli \
-            -p ${{ secrets.GITHUB_TOKEN }} \
+            -p ${{ secrets.PAT }} \
             --store-password-in-clear-text
 
       # ----------------------------------------------------------------------
