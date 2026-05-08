@@ -9,12 +9,12 @@ on:
 
 permissions:
   contents: write
+  packages: read
 
 jobs:
   setup:
     name: Generate Project From Template
 
-    # Prevent infinite loop after generated commit
     if: github.event.head_commit.message != 'Initial generated project'
 
     runs-on: ubuntu-latest
@@ -38,11 +38,11 @@ jobs:
 
           if [[ "$TEMPLATE" == "true" ]]; then
             echo "This is the template repository itself. Skipping."
-            exit 1
+            exit 0
           fi
 
       # ----------------------------------------------------------------------
-      # Checkout repository
+      # Checkout
       # ----------------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -66,37 +66,7 @@ jobs:
           pip install cookiecutter
 
       # ----------------------------------------------------------------------
-      # Validate repository name
-      # Example:
-      #   CleanCode.Service.Users
-      #   CleanCode.Api.Payments
-      # ----------------------------------------------------------------------
-      # - name: Validate repository naming convention
-      #   id: validate_repo
-      #   shell: bash
-      #   run: |
-      #     REPO_NAME="${{ github.event.repository.name }}"
-
-      #     shopt -s nocasematch
-
-      #     if [[ "$REPO_NAME" =~ ^(CleanCode|Framework)\.(Service|Api|Library|Worker)\.[A-Za-z]+([A-Za-z0-9\-]*)$ ]]; then
-      #       echo "valid=true" >> $GITHUB_OUTPUT
-      #       echo "Repository name valid"
-      #     else
-      #       echo "valid=false" >> $GITHUB_OUTPUT
-      #       echo "Invalid repository name"
-      #       echo ""
-      #       echo "Examples:"
-      #       echo "  CleanCode.Service.Users"
-      #       echo "  CleanCode.Api.Payments"
-      #       echo "  Framework.Library.Core"
-      #       exit 1
-      #     fi
-
-      #     shopt -u nocasematch
-
-      # ----------------------------------------------------------------------
-      # Generate project from Cookiecutter
+      # Generate project
       # ----------------------------------------------------------------------
       - name: Generate project
         run: |
@@ -105,7 +75,7 @@ jobs:
             --output-dir ./generated
 
       # ----------------------------------------------------------------------
-      # Remove template files
+      # Clean template files
       # ----------------------------------------------------------------------
       - name: Clean template repository
         shell: bash
@@ -117,7 +87,7 @@ jobs:
             -exec rm -rf {} +
 
       # ----------------------------------------------------------------------
-      # Move generated files to repository root
+      # Move generated files
       # ----------------------------------------------------------------------
       - name: Move generated project files
         shell: bash
@@ -134,33 +104,48 @@ jobs:
           dotnet-version: 8.0.x
 
       # ----------------------------------------------------------------------
-      # Restore solution
+      # Configure NuGet
+      # ----------------------------------------------------------------------
+      - name: Configure NuGet
+        shell: bash
+        run: |
+          cat > NuGet.Config <<EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <packageSources>
+              <add key="github" value="https://nuget.pkg.github.com/vmetreveli/index.json" />
+              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+            </packageSources>
+
+            <packageSourceCredentials>
+              <github>
+                <add key="Username" value="${{ github.actor }}" />
+                <add key="ClearTextPassword" value="${{ secrets.GITHUB_TOKEN }}" />
+              </github>
+            </packageSourceCredentials>
+          </configuration>
+          EOF
+
+      # ----------------------------------------------------------------------
+      # Restore
       # ----------------------------------------------------------------------
       - name: Restore dependencies
-        run: |
-          dotnet restore
+        run: dotnet restore --configfile NuGet.Config
 
       # ----------------------------------------------------------------------
-      # Build solution
+      # Build
       # ----------------------------------------------------------------------
       - name: Build solution
-        run: |
-          dotnet build \
-            --configuration Release \
-            --no-restore
+        run: dotnet build --configuration Release --no-restore
 
       # ----------------------------------------------------------------------
-      # Run tests
+      # Test
       # ----------------------------------------------------------------------
       - name: Run tests
-        run: |
-          dotnet test \
-            --configuration Release \
-            --no-build \
-            --verbosity normal
+        run: dotnet test --configuration Release --no-build --verbosity normal
 
       # ----------------------------------------------------------------------
-      # Create common GitHub labels
+      # Create labels
       # ----------------------------------------------------------------------
       - name: Create repository labels
         shell: bash
@@ -182,21 +167,16 @@ jobs:
             --description "Refactoring or cleanup work" || true
 
       # ----------------------------------------------------------------------
-      # Reinitialize repository history
+      # Reinitialize git history
       # ----------------------------------------------------------------------
       - name: Reinitialize git history
         shell: bash
         run: |
-          CURRENT_USER_NAME=$(git log -1 --pretty=format:'%an')
-          CURRENT_USER_EMAIL=$(git log -1 --pretty=format:'%ae')
-
-          git config user.name "$CURRENT_USER_NAME"
-          git config user.email "$CURRENT_USER_EMAIL"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
           git checkout --orphan generated-main
-
           git add .
-
           git commit -m "Initial generated project"
 
           git branch -D main || true
@@ -205,7 +185,7 @@ jobs:
           git push --force origin main
 
       # ----------------------------------------------------------------------
-      # Remove setup workflow after generation
+      # Remove bootstrap workflow
       # ----------------------------------------------------------------------
       - name: Remove bootstrap workflow
         shell: bash
@@ -213,17 +193,15 @@ jobs:
           rm -f .github/workflows/setup-repository.yml
 
           git add .
-
-          git commit --amend \
-            -m "Initial generated project"
+          git commit --amend --no-edit
 
           git push --force origin main
 
       # ----------------------------------------------------------------------
-      # Final output
+      # Summary
       # ----------------------------------------------------------------------
       - name: Summary
         run: |
-          echo "Repository successfully generated from template."
-          echo "Template bootstrap workflow removed."
-          echo "Project is ready."
+          echo "Repository successfully generated."
+          echo "Bootstrap workflow removed."
+          echo "Project ready."
