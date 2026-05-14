@@ -10,7 +10,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddAutoMapper(typeof(DependencyInjection).Assembly);
+        // services.AddAutoMapper(typeof(DependencyInjection).Assembly);
         services.AddFramework(configuration, typeof(DependencyInjection).Assembly);
 
         return services;
