@@ -14,23 +14,19 @@ permissions:
 jobs:
   setup:
     name: Generate Project From Template
-
     if: github.event.head_commit.message != 'Initial generated project'
-
     runs-on: ubuntu-latest
 
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      # ----------------------------------------------------------------------
-      # Prevent execution on template repository itself
-      # ----------------------------------------------------------------------
+      # Prevent execution on the template repository itself
       - name: Check repository is not template source
         shell: bash
         run: |
           TEMPLATE=$(curl --silent \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: token $GH_TOKEN" \
             https://api.github.com/repos/${{ github.repository }} \
             | jq -r '.is_template')
 
@@ -41,42 +37,32 @@ jobs:
             exit 0
           fi
 
-      # ----------------------------------------------------------------------
       # Checkout
-      # ----------------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # ----------------------------------------------------------------------
       # Setup Python
-      # ----------------------------------------------------------------------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      # ----------------------------------------------------------------------
       # Install Cookiecutter
-      # ----------------------------------------------------------------------
       - name: Install Cookiecutter
         run: |
           python -m pip install --upgrade pip
           pip install cookiecutter
 
-      # ----------------------------------------------------------------------
-      # Generate project
-      # ----------------------------------------------------------------------
+      # Generate project from template
       - name: Generate project
         run: |
           cookiecutter . \
             --no-input \
             --output-dir ./generated
 
-      # ----------------------------------------------------------------------
-      # Clean template files
-      # ----------------------------------------------------------------------
+      # Remove template files
       - name: Clean template repository
         shell: bash
         run: |
@@ -86,67 +72,35 @@ jobs:
             ! -name '.' \
             -exec rm -rf {} +
 
-      # ----------------------------------------------------------------------
-      # Move generated files
-      # ----------------------------------------------------------------------
+      # Move generated files into repo root
       - name: Move generated project files
         shell: bash
         run: |
           rsync -a ./generated/*/ ./
           rm -rf ./generated
 
-      # ----------------------------------------------------------------------
-      # Setup .NET
-      # ----------------------------------------------------------------------
+      # Setup .NET and authenticate to GitHub Packages
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
+          source-url: https://nuget.pkg.github.com/vmetreveli/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # ----------------------------------------------------------------------
-      # Configure NuGet
-      # ----------------------------------------------------------------------
-      - name: Configure NuGet
-        shell: bash
-        run: |
-          cat > NuGet.Config <<EOF
-          <?xml version="1.0" encoding="utf-8"?>
-          <configuration>
-            <packageSources>
-              <add key="github" value="https://nuget.pkg.github.com/vmetreveli/index.json" />
-              <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
-            </packageSources>
-
-            <packageSourceCredentials>
-              <github>
-                <add key="Username" value="${{ github.actor }}" />
-                <add key="ClearTextPassword" value="${{ secrets.GITHUB_TOKEN }}" />
-              </github>
-            </packageSourceCredentials>
-          </configuration>
-          EOF
-
-      # ----------------------------------------------------------------------
-      # Restore
-      # ----------------------------------------------------------------------
+      # Restore dependencies
       - name: Restore dependencies
-        run: dotnet restore --configfile NuGet.Config
+        run: dotnet restore
 
-      # ----------------------------------------------------------------------
-      # Build
-      # ----------------------------------------------------------------------
+      # Build solution
       - name: Build solution
         run: dotnet build --configuration Release --no-restore
 
-      # ----------------------------------------------------------------------
-      # Test
-      # ----------------------------------------------------------------------
+      # Run tests
       - name: Run tests
         run: dotnet test --configuration Release --no-build --verbosity normal
 
-      # ----------------------------------------------------------------------
-      # Create labels
-      # ----------------------------------------------------------------------
+      # Create repository labels
       - name: Create repository labels
         shell: bash
         run: |
@@ -166,27 +120,20 @@ jobs:
             --color "5319e7" \
             --description "Refactoring or cleanup work" || true
 
-      # ----------------------------------------------------------------------
-      # Reinitialize git history
-      # ----------------------------------------------------------------------
+      # Reinitialize git history and push to dev branch
       - name: Reinitialize git history
         shell: bash
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-          git checkout --orphan generated-main
+          git checkout --orphan dev
           git add .
           git commit -m "Initial generated project"
 
-          git branch -D main || true
-          git branch -m main
+          git push --force origin dev
 
-          git push --force origin main
-
-      # ----------------------------------------------------------------------
-      # Remove bootstrap workflow
-      # ----------------------------------------------------------------------
+      # Remove bootstrap workflow itself
       - name: Remove bootstrap workflow
         shell: bash
         run: |
@@ -195,13 +142,11 @@ jobs:
           git add .
           git commit --amend --no-edit
 
-          git push --force origin main
+          git push --force origin dev
 
-      # ----------------------------------------------------------------------
       # Summary
-      # ----------------------------------------------------------------------
       - name: Summary
         run: |
           echo "Repository successfully generated."
           echo "Bootstrap workflow removed."
-          echo "Project ready."
+          echo "Generated project pushed to 'dev' branch."
